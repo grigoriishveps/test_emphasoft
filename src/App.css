@@ -9,7 +9,7 @@
   pointer-events: none;
 }
 
-.App-header {
+.App-main {
   border-radius: 25px;
   background-color: #FCF4DA;
   min-height: 100vh;
@@ -17,10 +17,39 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  font-size: 12px;
   color: white;
   width: 80%;
   padding: 20px;
+}
+
+.classicFont, button{
+  font-family: Roboto;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 19px;
+}
+.flexRow{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+button{
+  height: 39px;
+  font-weight: 500;
+  color: white;
+  border-radius: 33px;
+  border: 2px solid #567354;
+  background: #567354;
+  outline: none;
+}
+
+input[type=text]{
+  width:100%;
+  height: 23px;
+  border-radius: 4px;
+  border: 2px solid gray;
+
 }
 
 .tableBox{
@@ -29,20 +58,18 @@
   border-radius: 58px;
   margin-top: 20px;
 }
-table{
+.tableData{
   width: 90%;
   table-layout: fixed;
-  margin: auto;
-  margin-top: 20px;
+  margin: 20px auto auto;
   padding: 20px;
   color: #435F40;
   border: none;
   outline: none;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 14px;
-  border-collapse: collapse
+  border-collapse: collapse;
+}
+.tableBody{
+  font-size: 12px !important;
 }
 tr{
   border-bottom: 1px solid #ccc;
@@ -54,66 +81,45 @@ tbody tr:hover{
 th:hover{
   background: #DCB18B;
 }
+
 td{
   padding: 3px 5px;
   word-wrap: break-word;
 }
-thead{
+.tablehead{
   color: #567354;
-  font-family: Roboto;
+  font-family: Roboto, serif;
   font-style: normal;
-  font-weight: 500;
-  font-size: 19px;
+  font-weight: 500 ;
+  font-size: 19px ;
   line-height: 22px;
   text-align: center;
-}
-
-tbody{
-  margin-top: 20px;
 }
 
 .authComponent{
   background: #F3DBC7;
   border-radius: 28px;
-  width: 30%;
+  max-width: 300px;
+  width: 35%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 15px 20px;
+  align-items: flex-start;
+  padding: 15px 40px;
   align-self: center;
-}
-.authComponent input{
-  /*width: 60%;*/
-  height: 25px;
-  margin: 10px;
 }
 
 .authComponent button{
   width: 129px;
-  height: 39px;
-  background: #567354;
-  border-radius: 33px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #FFFFFF;
-  margin: 10px;
+  margin-top: 20px;
+  align-self: center;
 }
 
 .upPanel{
   width: 80%;
-
-  display:flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
 }
+
 .upPanel div{
-  display:flex;
-  flex-direction: row;
   align-items: center;
   width: 70%;
 }
@@ -121,39 +127,85 @@ tbody{
 .upPanel input{
   width: 90%;
   height: 25px;
-  border: 2px solid gray;
   border-radius: 4px;
 }
 
 .upPanel button {
   width: auto;
-  height: 39px;
   background: #567354;
-  border-radius: 33px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #FFFFFF;
-  padding: 0px 15px;
+  padding: 0 15px;
   margin: 0 2px;
-  border: 2px solid #567354;
-  outline: none;
-}
-
-.upPanel  button:hover {
-  border-color: black;
-  background: #FFFFFF;
-  font-weight: 500;
-  color: #567354;
-}
-.upPanel  button:active {
-  background: lightgray;
 }
 
 .upPanel div *{
   margin-right: 10px;
 }
 
+.charField{
+  min-width: auto;
+  margin-top: 5px;
+  font-family: Roboto, serif;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 18px;
+  border: 0;
+  color: #435F40;
+}
+
+.editComponent{
+  width: 330px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 25px 40px;
+  background: #F3DBC7;
+  border-radius: 28px;
+}
+
+.editComponent button {
+  align-self: center;
+  width: 140px;
+}
+
+.editComponent label, .authComponent label{
+  height: 12px;
+  margin: -2px 2px;
+  color:red;
+  font-size: 10px;
+}
+
+input[type="checkbox"]{
+  margin-left: 5px;
+}
+
+span{
+  color: #435F40;
+}
+
+.editComponent *,.authComponent *{
+  margin: 5px 0;
+}
+
+.infoSend{
+  height: 12px;
+  margin: -2px 2px;
+  color:red;
+  font-size: 12px;
+  align-self: center;
+}
+
+.buttonBox{
+  width:100%;
+  justify-content: space-around;
+}
+
+button:hover {
+  border-color: black;
+  background: #FFFFFF;
+  color: #567354;
+}
+
+button:active{
+  background: lightgray;
+}

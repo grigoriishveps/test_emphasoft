@@ -6,16 +6,17 @@ import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 
 function NewUserComponent (props){
-    const [username, setUsername] = useState('fsdfdfsd');
-    const [password, setPassword] = useState('sdf23423');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [first_name, setFirst] = useState('');
     const [last_name, setLast] = useState('');
     const [is_active, setActive] = useState(true);
 
     const [userErr, setUserErr] = useState('Не пусто');
-    const [passErr, setPassErr] = useState('Должно быть больше 8');
+    const [passErr, setPassErr] = useState('Не пусто');
     const [firstErr, setFirstErr] = useState('');
     const [lastErr, setLastErr] = useState('');
+    const [sendErr, setSendErr] = useState("");
 
     let handleChangeField = (field, event) =>{
         const value = event.target.value;
@@ -30,7 +31,7 @@ function NewUserComponent (props){
                 break;
             case "password":
                 setPassword(value);
-                err = (!value.match(/^(?=.*[A-Z])(?=.*\d).{8,}$/))?"Только буквы, цифры и (+_-.@":"";
+                err = (!value.match(/^(?=.*[A-Z])(?=.*\d).*$/))?"Хотя бы 1 символ прописной и цифры. ":"";
                 err += (value.length> 128)?"Не более 128 символов":"";
                 err += (value.length < 9)?"Введите больше 8 символов":"";
                 setPassErr(err);
@@ -44,28 +45,39 @@ function NewUserComponent (props){
                 setLastErr((value.length> 150)?"Не более 150 символов":"");
                 break;
         }
-    }
+    };
 
     let handleChangeChecked = ( event) =>{
         const value = event.target.checked;
         setActive(value);
         //
-    }
+    };
 
     let handleClickReg = ()=>{
         console.log({username, password, first_name, last_name, is_active});
-        axios.post("http://emphasoft-test-assignment.herokuapp.com/api/v1/users/",{username, password, first_name, last_name, is_active} , props.authHeader).then(
-            (response)=>{
-                console.log(response);
-            }).catch((response)=>{
-            console.log(response);
-        });
-    }
+        if(userErr ==="" && (passErr==="" || this.state.password==="")&& firstErr ==="" && lastErr==="") {
+            axios.post("http://emphasoft-test-assignment.herokuapp.com/api/v1/users/", {
+                username,
+                password,
+                first_name,
+                last_name,
+                is_active
+            }, props.authHeader).then(
+                (response) => {
+                    console.log(response);
+                    setSendErr("Успешно сохранено");
+                }).catch((response) => {
+                console.log(response);})
+        }
+        else{
+            setSendErr("Исправьте ошибки!")
+        }
+    };
 
     if (props.token==='')
         return(<Redirect to='/' />);
     return(
-        <div className="editComponent">
+        <div className="editComponent ">
 
             <span><b>username:</b></span>
             <input type="text" className="charField" value={username} onChange={handleChangeField.bind( this, "username")} />
@@ -90,11 +102,11 @@ function NewUserComponent (props){
                 <input type="checkbox" checked={is_active} onChange={handleChangeChecked.bind(this)}/>
             </div>
 
-            <div className="buttonBox">
+            <div className="buttonBox flexRow">
                 <button onClick={handleClickReg}>Зарегистрировать</button>
                 <Link to={'/users'}> <button >Вернуться назад</button></Link>
             </div>
-
+            <label className="infoSend">{sendErr}</label>
         </div>
 
     )

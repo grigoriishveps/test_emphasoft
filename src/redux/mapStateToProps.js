@@ -4,15 +4,6 @@ function mapStateToProps(component) {
         return {headers:{"Authorization": "Token " + state.token}};
     }
     switch (component) {
-
-        case "HistoryQuiz": {
-            return function (state) {
-                return {
-                    token: state.token,
-                    authHeader: createAuthHeader(state)
-                };
-            }
-        }
         case "NewUserComponent": {
             return function (state) {
                 return {

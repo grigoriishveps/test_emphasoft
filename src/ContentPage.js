@@ -16,7 +16,7 @@ class ContentPage extends React.Component{
             sort: 'asc',  // 'desc'
             sortField: 'id',
             filter:''
-        }
+        };
         this.handleChangeFilter = this.handleChangeFilter.bind(this);
         this.handleClickFilter = this.handleClickFilter.bind(this);
         this.handleClickSort = this.handleClickSort.bind(this);
@@ -47,13 +47,13 @@ class ContentPage extends React.Component{
         if (!search) {
             return currentdata;
         }
-        var result = currentdata.filter(item => {
+        return currentdata.filter(item => {
             return (""+item["username"]).toLowerCase().includes(search.toLowerCase());
         });
         // if(!result.length){
         //     result = currentdata;
         // }
-        return result;
+
     }
     handleClickRow(id){
         this.props.history.push("/users/"+id);
@@ -64,9 +64,8 @@ class ContentPage extends React.Component{
         const data = this.state.data;
         const filterdata = this.getFilteredData(data, this.state.filter);
         const sortdata = lodash.orderBy(filterdata, 'id', this.state.sort);
-        let content = sortdata.map((item,index)=>{
-            return (<tr key={item.username} onClick={this.handleClickRow.bind(this, item.id )}>
-
+        let content = sortdata.map((item)=>{
+            return (<tr className="tableBody" key={item.username} onClick={this.handleClickRow.bind(this, item.id )}>
                 <td width="5%" onClick={this.handleClickSort} >{item.id}</td>
                 <td >{item.username}</td>
                 <td>{item.first_name?item.first_name:'-'}</td>
@@ -74,7 +73,6 @@ class ContentPage extends React.Component{
                 <td>{item.last_login? item.last_login:"-"}</td>
                 <td>{item.is_active? "Да":"Нет"}</td>
                 <td>{item.is_superuser? "Да":"Нет"}</td>
-
             </tr>)
         });
         if (this.props.token==='')
@@ -82,16 +80,16 @@ class ContentPage extends React.Component{
         return(
             <>
                 {/*<Redirect to="users/new"/>*/}
-                <div className="upPanel">
-                    <div>
+                <div className="upPanel flexRow">
+                    <div className="flexRow">
                         <input type='text' value={this.state.filterField} onChange={this.handleChangeFilter} />
                         <button onClick={this.handleClickFilter}> Найти </button>
                     </div>
                     <Link to="users/new"> <button >Создать пользователя </button></Link>
                 </div>
                 <div className="tableBox">
-                    <table >
-                        <thead>
+                    <table className="tableData">
+                        <thead className="tableHead">
                             <tr>
                                 <th width="6%" onClick={this.handleClickSort}>ID <img width="12" height="15" alt="" src={this.state.sort=== 'asc'? imgdown:imgup}/></th>
                                 <th>Username</th>

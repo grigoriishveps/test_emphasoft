@@ -3,16 +3,6 @@ import * as actionCreator from './actionCreator';
 
 function mapDispatchToProps(component) {
     switch (component) {
-        case "HistoryQuiz": return function (dispatch) {
-            return {};
-        };
-        case "CreateQuiz": return function (dispatch) {
-            return {};
-        };
-
-        case "MenuQuiz":return function (dispatch){
-            return {};
-        }
         case "ContentPage":return function (dispatch){
             return {};
         }
